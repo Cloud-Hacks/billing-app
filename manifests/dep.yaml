@@ -14,7 +14,7 @@ spec:
         app: mydevapp-ui
     spec:
       containers:
-      - image: gcr.io/google-samples/gb-frontend:v7
+      - image: gcr.io/google-samples/gb-frontend:v5
         name: mydevapp-ui
         ports:
         - containerPort: 80
