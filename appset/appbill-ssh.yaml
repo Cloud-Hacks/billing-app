@@ -1,0 +1,26 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: gb-test
+spec:
+  goTemplate: true
+  goTemplateOptions: ["missingkey=error"]
+  generators:
+    - git:
+        repoURL: git@github.com:Cloud-Hacks/billing-app.git
+        revision: HEAD
+        files:
+        - path: "manifests/*"
+  template:
+    metadata:
+      name: '{{.cluster.name}}-gb'
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:Cloud-Hacks/billing-app.git
+        targetRevision: HEAD
+        path: "manifests"
+      destination:
+        name: in-cluster
+        #server: '{{.cluster.address}}'
+        namespace: test
